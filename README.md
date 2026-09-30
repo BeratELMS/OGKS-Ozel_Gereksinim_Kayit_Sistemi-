@@ -16,8 +16,3 @@ Sistemde yer alan temel modüller şunlardır:
 5. **Kriz ve Tetikleyici Günlüğü:** Kriz anlarını, şiddet derecelerini ve çevresel tetikleyicileri kayıt altına alır.
 6. **İlaç ve Yan Etki Modülü:** Düzenli ilaç takibinin yanı sıra, olası reaksiyonların bakıcı tarafından girilip doktora raporlanmasını ve doktor geri bildirimlerinin saklanmasını sağlar.
 7. **Materyal ve Cihaz Zimmet:** Tekerlekli sandalye, ortez veya özel eğitim materyallerinin zimmet takibini yapar.
-
-## ⚙️ Sistem Özellikleri
-* **İlişkisel Bütünlük:** Tüm tablolar Foreign Key kısıtlamalarıyla birbirine tam entegredir.
-* **Gelişmiş Veritabanı Nesneleri:** Karmaşık `JOIN` sorguları, görünümler (`Views`) ve kritik durumlar için veritabanı tetikleyicileri (`Triggers`) barındırır.
-* **Karar Destek:** Toplanan veriler sayesinde bireylerin gelişim grafikleri izlenir ve risk analizleri yapılabilir.
