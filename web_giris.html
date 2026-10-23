@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OGKS Giriş</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF3F8; --panel:#17304F; --panel-ink:#F2F6FB; --panel-muted:#A9BCD3;
+  --card:#FFFFFF; --ink:#16243A; --muted:#5B6B80; --line:#CBD6E2;
+  --accent:#2E6DB4; --accent-ink:#FFFFFF; --warm:#F2B84B; --err:#B3261E; --ok:#1B7A4B;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1622; --panel:#0A2038; --panel-ink:#EAF1F9; --panel-muted:#8FA6C0;
+    --card:#162234; --ink:#E7EEF7; --muted:#9AAABD; --line:#2B3C52;
+    --accent:#6FA8E8; --accent-ink:#0B1626; --err:#FF8A80; --ok:#6FD3A0;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1622; --panel:#0A2038; --panel-ink:#EAF1F9; --panel-muted:#8FA6C0;
+  --card:#162234; --ink:#E7EEF7; --muted:#9AAABD; --line:#2B3C52;
+  --accent:#6FA8E8; --accent-ink:#0B1626; --err:#FF8A80; --ok:#6FD3A0;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);
+  font-family:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:16px;line-height:1.5}
+.shell{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);min-height:100vh}
+.side{background:var(--panel);color:var(--panel-ink);padding:56px 56px 48px;display:flex;flex-direction:column;justify-content:space-between;gap:40px}
+.mark{display:flex;align-items:center;gap:12px;font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:700;font-size:22px;letter-spacing:.02em}
+.mark i{width:14px;height:14px;border-radius:50%;background:var(--warm);display:block;box-shadow:20px 0 0 -4px var(--panel-muted)}
+.side h1{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:700;font-size:clamp(34px,4.2vw,54px);line-height:1.08;margin:0 0 20px;max-width:12ch}
+.side p{margin:0;color:var(--panel-muted);max-width:38ch}
+.who{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.who li{border:1px solid color-mix(in srgb,var(--panel-muted) 55%,transparent);border-radius:999px;padding:6px 14px;font-size:14px;color:var(--panel-ink)}
+.main{display:flex;align-items:center;justify-content:center;padding:32px 24px}
+.card{width:100%;max-width:420px}
+.card h2{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:30px;margin:0 0 6px}
+.card .sub{color:var(--muted);margin:0 0 28px}
+label{display:block;font-weight:600;font-size:14px;margin:0 0 6px}
+.field{margin-bottom:18px}
+input[type=email],input[type=password],input[type=text]{width:100%;height:48px;padding:0 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+input[aria-invalid="true"]{border-color:var(--err)}
+.pw{position:relative}
+.pw button{position:absolute;right:6px;top:6px;height:36px;padding:0 12px;border:0;background:transparent;color:var(--accent);font:inherit;font-weight:600;cursor:pointer;border-radius:8px}
+.err{color:var(--err);font-size:13px;margin:6px 0 0;min-height:0}
+.row{display:flex;justify-content:space-between;align-items:center;margin:4px 0 22px;font-size:14px;gap:12px;flex-wrap:wrap}
+.row label{display:flex;align-items:center;gap:8px;font-weight:500;margin:0}
+.row input{width:18px;height:18px;accent-color:var(--accent)}
+a{color:var(--accent);font-weight:600}
+.go{width:100%;height:50px;border:0;border-radius:10px;background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:600;font-size:16px;cursor:pointer}
+.go[disabled]{opacity:.7;cursor:progress}
+.status{margin-top:18px;padding:12px 14px;border-radius:10px;font-size:14px;display:none;background:color-mix(in srgb,var(--warm) 22%,var(--card));border:1px solid var(--warm)}
+.status.show{display:block}
+.foot{margin-top:28px;color:var(--muted);font-size:13px}
+@media (max-width:820px){
+  .shell{grid-template-columns:1fr}
+  .side{padding:28px 24px;gap:20px}
+  .side h1{font-size:30px;max-width:none;margin-bottom:10px}
+  .who{display:none}
+}
+@media (prefers-reduced-motion:no-preference){
+  .go{transition:filter .15s}.go:hover{filter:brightness(1.08)}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="mark"><i aria-hidden="true"></i>OGKS</div>
+    <div>
+      <h1>Hoş geldiniz</h1>
+      <p>Eğitim, sağlık, randevu, ilaç ve kriz kayıtları; aile, uzman ve doktorun ortak ekranında.</p>
+    </div>
+    <ul class="who" aria-label="Kullanıcı grupları">
+      <li>Veli</li><li>Uzman</li><li>Doktor</li><li>Yönetici</li>
+    </ul>
+  </aside>
+
+  <main class="main">
+    <div class="card">
+      <h2>Giriş yap</h2>
+      <p class="sub">Hesabınızla devam edin.</p>
+      <form id="f" novalidate>
+        <div class="field">
+          <label for="email">E-posta</label>
+          <input id="email" type="email" autocomplete="username" inputmode="email" placeholder="ad@kurum.com" aria-describedby="e1">
+          <p class="err" id="e1" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="pw">Şifre</label>
+          <div class="pw">
+            <input id="pw" type="password" autocomplete="current-password" aria-describedby="e2">
+            <button type="button" id="tg" aria-pressed="false">Göster</button>
+          </div>
+          <p class="err" id="e2" role="alert"></p>
+        </div>
+        <div class="row">
+          <label><input type="checkbox" id="rem">E-postamı hatırla</label>
+          <a href="#sifre" id="forgot">Şifremi unuttum</a>
+        </div>
+        <button class="go" id="go" type="submit">Giriş yap</button>
+        <div class="status" id="st" role="status"></div>
+      </form>
+      <p class="foot">Hesabınız yoksa kurumunuzun yöneticisinden hesap açmasını isteyin.</p>
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var email=$('email'), pw=$('pw'), st=$('st'), go=$('go');
+
+  try{ var saved=localStorage.getItem('ogks_email'); if(saved){email.value=saved;$('rem').checked=true;} }catch(e){}
+
+  $('tg').addEventListener('click',function(){
+    var show=pw.type==='password';
+    pw.type=show?'text':'password';
+    this.textContent=show?'Gizle':'Göster';
+    this.setAttribute('aria-pressed',show);
+  });
+
+  function setErr(inp,id,msg){
+    $(id).textContent=msg||'';
+    if(msg){inp.setAttribute('aria-invalid','true')}else{inp.removeAttribute('aria-invalid')}
+    return !msg;
+  }
+  function notice(msg){st.textContent=msg;st.classList.add('show');}
+
+  $('forgot').addEventListener('click',function(e){
+    e.preventDefault();
+    notice('Şifre sıfırlama için kurum yöneticinizle iletişime geçin.');
+  });
+
+  $('f').addEventListener('submit',function(e){
+    e.preventDefault();
+    st.classList.remove('show');
+    var v=email.value.trim();
+    var okE=setErr(email,'e1', !v ? 'E-posta adresinizi yazın.' : (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? 'E-posta adresi geçerli değil. Örnek: ad@kurum.com' : ''));
+    var okP=setErr(pw,'e2', !pw.value ? 'Şifrenizi yazın.' : (pw.value.length<6 ? 'Şifre en az 6 karakter olmalı.' : ''));
+    if(!okE){email.focus();return;}
+    if(!okP){pw.focus();return;}
+
+    try{ if($('rem').checked){localStorage.setItem('ogks_email',v)}else{localStorage.removeItem('ogks_email')} }catch(e){}
+
+    go.disabled=true; go.textContent='Giriş yapılıyor…';
+    // Bu sayfa şimdilik sadece arayüzdür. Gerçek girişte buraya
+    // sunucuya (API) istek atılır: e-posta + şifre -> Users.PasswordHash kontrolü.
+    setTimeout(function(){
+      go.disabled=false; go.textContent='Giriş yap';
+      notice('Arayüz hazır. Giriş doğrulaması için sunucu (API) bağlantısı henüz yok.');
+    },700);
+  });
+})();
+</script>
+</body>
+</html>
